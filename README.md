@@ -38,13 +38,16 @@ pageInfoTextSeparator | string | ' / ' | separator for `{currentPage}` and `{tot
 bullets | bool | false | wether to show "bullets" at the bottom of the carousel
 bulletStyle | style | null | style for each bullet
 bulletsContainerStyle | style | null | style for the bullets container
-chosenBulletStyle | stlye | null | style for the selected bullet
+chosenBulletStyle | style | null | style for the selected bullet
 **Arrows** | --- | --- | ---
 arrows | bool | false | wether to show navigation arrows for the carousel
 arrowsStyle | style | null | style for navigation arrows
 arrowsContainerStyle | style | null | style for the navigation arrows container
 leftArrowText | string / element | 'Left' | label / icon for left navigation arrow
 rightArrowText | string / element | 'Right' | label / icon for right navigation arrow
+leftArrowImage | Image source | null | image / icon for left navigation arrow
+rightArrowImage | Image source | null | image / icon for right navigation arrow
+arrowImageStyle | style | null | style for arrow images (e.g. width and height)
 
 ## Usage
 ```js

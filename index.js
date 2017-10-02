@@ -3,6 +3,7 @@ import {
   Platform,
   StyleSheet,
   Text,
+  Image,
   ScrollView,
   TouchableOpacity,
   View,
@@ -50,6 +51,9 @@ export default class Carousel extends Component {
       PropTypes.string,
       PropTypes.element,
     ]),
+    leftArrowImage: Image.propTypes.source,
+    rightArrowImage: Image.propTypes.source,
+    arrowImageStyle: viewPropTypes.style,
     chosenBulletStyle: Text.propTypes.style,
     onAnimateNextPage: PropTypes.func,
     swipe: PropTypes.bool,
@@ -76,6 +80,9 @@ export default class Carousel extends Component {
     arrowStyle: undefined,
     leftArrowText: '',
     rightArrowText: '',
+    leftArrowImage: undefined,
+    rightArrowImage: undefined,
+    arrowImageStyle: undefined,
     onAnimateNextPage: undefined,
     swipe: true,
   };
@@ -315,15 +322,40 @@ export default class Carousel extends Component {
     if (currentPage < 1) {
       currentPage = childrenLength;
     }
+
+    if (this.props.leftArrowText && this.props.leftArrowImage) {
+      console.warn("Props leftArrowImage and leftArrowText are both defined. leftArrowImage will be used.");
+    }
+
+    if (this.props.rightArrowText && this.props.rightArrowImage) {
+      console.warn("Props rightArrowImage and rightArrowText are both defined. rightArrowImage will be used.");
+    }
+
     return (
       <View style={styles.arrows} pointerEvents="box-none">
         <View style={[styles.arrowsContainer, this.props.arrowsContainerStyle]} pointerEvents="box-none">
-          <TouchableOpacity onPress={() => this.animateToPage(this._normalizePageNumber(currentPage - 1))} style={this.props.arrowStyle}><Text>{this.props.leftArrowText ? this.props.leftArrowText : 'Left'}</Text></TouchableOpacity>
-          <TouchableOpacity onPress={() => this.animateToPage(this._normalizePageNumber(currentPage + 1))} style={this.props.arrowStyle}><Text>{this.props.rightArrowText ? this.props.rightArrowText : 'Right'}</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => this.animateToPage(this._normalizePageNumber(currentPage - 1))} style={this.props.arrowStyle}>{this.props.leftArrowImage ? this._renderLeftArrowImage() : this._renderLeftArrowText()}</TouchableOpacity>
+          <TouchableOpacity onPress={() => this.animateToPage(this._normalizePageNumber(currentPage + 1))} style={this.props.arrowStyle}>{this.props.rightArrowImage ? this._renderRightArrowImage() : this._renderRightArrowText()}</TouchableOpacity>
         </View>
       </View>
     );
   }
+
+  _renderLeftArrowText = () => (
+    <Text>{this.props.leftArrowText ? this.props.leftArrowText : 'Left'}</Text>
+  )
+
+  _renderRightArrowText = () => (
+    <Text>{this.props.rightArrowText ? this.props.rightArrowText : 'Right'}</Text>
+  )
+
+  _renderLeftArrowImage = () => (
+    <Image source={this.props.leftArrowImage} style={this.props.arrowImageStyle}/>
+  )
+
+  _renderRightArrowImage = () => (
+    <Image source={this.props.rightArrowImage} style={this.props.arrowImageStyle}/>
+  )
 
   render() {
     const { contents } = this.state;
