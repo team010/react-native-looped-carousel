@@ -1,6 +1,6 @@
 {
   "name": "react-native-looped-carousel",
-  "version": "0.1.7-persgroep",
+  "version": "0.1.8-persgroep",
   "description": "Looped carousel for React Native",
   "author": "Phil Rukin <philipp@rukin.me> (http://rukin.me)",
   "contributors": [
@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "lodash.isequal": "^4.5.0",
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.6.0"
   },
   "jest": {
     "notify": true,
