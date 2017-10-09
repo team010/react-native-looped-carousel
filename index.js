@@ -230,10 +230,6 @@ export default class Carousel extends Component {
     const { width } = this.state.size;
     const { childrenLength } = this.state;
     if (currentPage >= childrenLength) {
-      console.log('CURRENTPAGE >= CHILDERENLENGT, SETTINGSTATTE');
-      this.setState({
-          showRightArrowImage: false
-      })
       currentPage = 0;
     }
     if (currentPage === 0) {
@@ -273,7 +269,13 @@ export default class Carousel extends Component {
   _normalizePageNumber = (page) => {
     const { childrenLength } = this.state;
     if (page === childrenLength) {
-      return 0;
+	    console.log('CURRENTPAGE >= CHILDERENLENGT, SETTINGSTATTE');
+	    this.setState({
+		    showRightArrowImage: false
+	    })
+
+
+      return childrenLength;
     } else if (page >= childrenLength) {
       return 1;
     }
@@ -349,7 +351,7 @@ export default class Carousel extends Component {
 
 	_renderRightArrow(currentPage) {
       if (this.state.showRightArrowImage) {
-          console.log('RETRUN RIGHT ARROW IMAGE   ')
+		      console.log('RETRUN RIGHT ARROW IMAGE   ')
 	      return (<TouchableOpacity onPress={() => this.animateToPage(this._normalizePageNumber(currentPage + 1))}
               style={this.props.arrowStyle}>{this.props.rightArrowImage ? this._renderRightArrowImage() : this._renderRightArrowText()}</TouchableOpacity>);
       }
