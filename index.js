@@ -277,7 +277,7 @@ export default class Carousel extends Component {
 
       return childrenLength;
     } else if (page >= childrenLength) {
-      return 1;
+      return childrenLength;
     }
     return page;
   }
