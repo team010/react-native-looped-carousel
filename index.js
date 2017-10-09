@@ -273,12 +273,15 @@ export default class Carousel extends Component {
 	    this.setState({
 		    showRightArrowImage: false
 	    })
-
+	    console.log("returning childerentLegnt ", childrenLength);
 
       return childrenLength;
     } else if (page >= childrenLength) {
+      console.log("returning childerentLegnt ", childrenLength);
       return childrenLength;
     }
+
+    console.log("JUST RETURN PAGE ", page);
     return page;
   }
 
