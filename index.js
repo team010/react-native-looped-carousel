@@ -341,7 +341,7 @@ export default class Carousel extends Component {
       <View style={styles.arrows} pointerEvents="box-none">
 	      <View style={[styles.arrowsContainer, this.props.arrowsContainerStyle]} pointerEvents="box-none">
 		      {this.state.showLeftArrowImage ? this._renderLeftArrow(currentPage) : null}
-		      this._renderRightArrow(currentPage)
+              {this._renderRightArrow(currentPage)}
 	      </View>
       </View>
     );
@@ -350,8 +350,8 @@ export default class Carousel extends Component {
 	_renderRightArrow(currentPage) {
       if (this.state.showRightArrowImage) {
           console.log('RETRUN RIGHT ARROW IMAGE   ')
-	      return <TouchableOpacity onPress={() => this.animateToPage(this._normalizePageNumber(currentPage + 1))}
-              style={this.props.arrowStyle}>{this.props.rightArrowImage ? this._renderRightArrowImage() : this._renderRightArrowText()}</TouchableOpacity>;
+	      return (<TouchableOpacity onPress={() => this.animateToPage(this._normalizePageNumber(currentPage + 1))}
+              style={this.props.arrowStyle}>{this.props.rightArrowImage ? this._renderRightArrowImage() : this._renderRightArrowText()}</TouchableOpacity>);
       }
       else {
         console.error('JAJAJAJAJAJ RETURN NUUL FOR RITHARRWO IMAGA');
