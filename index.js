@@ -356,7 +356,7 @@ export default class Carousel extends Component {
               style={this.props.arrowStyle}>{this.props.rightArrowImage ? this._renderRightArrowImage() : this._renderRightArrowText()}</TouchableOpacity>);
       }
       else {
-        console.error('JAJAJAJAJAJ RETURN NUUL FOR RITHARRWO IMAGA');
+        console.log('JAJAJAJAJAJ RETURN NUUL FOR RITHARRWO IMAGA');
         return null;
       }
 
