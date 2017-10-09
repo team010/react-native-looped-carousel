@@ -224,15 +224,11 @@ export default class Carousel extends Component {
     this.animateToPage(this._normalizePageNumber(currentPage + 1));
   }
 
-  animateToPage = (page) => {
-    let currentPage = page;
+  animateToPage = (targetPage) => {
     this._clearTimer();
     const { width } = this.state.size;
     const { childrenLength } = this.state;
-    if (currentPage >= childrenLength) {
-      currentPage = 0;
-    }
-    if (currentPage === 0) {
+    if (targetPage === 0) {
       // animate properly based on direction
       const scrollMultiplier = this.state.currentPage === 1 ? 1 : -1;
       this._scrollTo({
@@ -241,14 +237,14 @@ export default class Carousel extends Component {
         nofix: true,
       });
       this._scrollTo({ offset: childrenLength * width, animated: true });
-    } else if (currentPage === 1) {
+    } else if (targetPage === 1) {
       const scrollMultiplier = this.state.currentPage === 0 ? 0 : 2;
       this._scrollTo({ offset: width * scrollMultiplier, animated: false, nofix: true });
       this._scrollTo({ offset: width, animated: true });
     } else {
-      this._scrollTo({ offset: currentPage * width, animated: true });
+      this._scrollTo({ offset: targetPage * width, animated: true });
     }
-    this._setCurrentPage(currentPage);
+    this._setCurrentPage(targetPage);
     this._setUpTimer();
   }
 
@@ -269,20 +265,22 @@ export default class Carousel extends Component {
   _normalizePageNumber = (page) => {
     const { childrenLength } = this.state;
     console.log(`normalizePageNumber:  page=${page}  childrenLength=${childrenLength}`);
-    if (page === childrenLength) {
-	    console.log('CURRENTPAGE >= CHILDERENLENGT, SETTINGSTATTE');
+    if (page > childrenLength) {
+      this.setState({
+          showRightArrowImage: false
+      })
+      return childrenLength;
+    } else if (page < 0) {
 	    this.setState({
-		    showRightArrowImage: false
+		    showLeftArrowImage: false
 	    })
-	    console.log("returning childerentLegnt ", childrenLength);
-
-      return childrenLength;
-    } else if (page >= childrenLength) {
-      console.log("returning childerentLegnt ", childrenLength);
-      return childrenLength;
+      return 0;
     }
 
-    console.log("JUST RETURN PAGE ", page);
+	  this.setState({
+		  showLeftArrowImage: true,
+		  showRightArrowImage: true
+	  })
     return page;
   }
 
@@ -311,13 +309,11 @@ export default class Carousel extends Component {
     const bullets = [];
     for (let i = 0; i < pageLength; i += 1) {
       bullets.push(
-        <TouchableWithoutFeedback onPress={() => this.animateToPage(i)} key={`bullet${i}`}>
           <View
             style={i === this.state.currentPage ?
               [styles.chosenBullet, this.props.chosenBulletStyle] :
               [styles.bullet, this.props.bulletStyle]}
-          />
-        </TouchableWithoutFeedback>);
+          />);
     }
     return (
       <View style={styles.bullets} pointerEvents="box-none">
