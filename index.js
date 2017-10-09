@@ -268,6 +268,7 @@ export default class Carousel extends Component {
 
   _normalizePageNumber = (page) => {
     const { childrenLength } = this.state;
+    console.log(`normalizePageNumber:  page=${page}  childrenLength=${childrenLength}`);
     if (page === childrenLength) {
 	    console.log('CURRENTPAGE >= CHILDERENLENGT, SETTINGSTATTE');
 	    this.setState({
@@ -331,7 +332,7 @@ export default class Carousel extends Component {
     let { currentPage } = this.state;
     const { childrenLength } = this.state;
     if (currentPage < 1) {
-      currentPage = childrenLength;
+      currentPage = 1;
     }
 
     if (this.props.leftArrowText && this.props.leftArrowImage) {
