@@ -230,6 +230,9 @@ export default class Carousel extends Component {
     const { width } = this.state.size;
     const { childrenLength } = this.state;
     if (currentPage >= childrenLength) {
+      this.setState({
+          showRightArrowImage: false
+      })
       currentPage = 0;
     }
     if (currentPage === 0) {
